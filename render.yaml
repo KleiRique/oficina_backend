@@ -17,19 +17,7 @@ services:
         sync: false
       - key: WAHA_API_BASE
         sync: false
-      - key: REDIS_URL
-        fromService:
-          name: oficina-redis
-          type: redis
-          property: connectionString
       - key: JWT_SECRET
         sync: false
       - key: PORT
         value: 8000
-
-  # Redis gerenciado pelo Render
-  - type: redis
-    name: oficina-redis
-    plan: free
-    region: ohio
-    maxmemoryPolicy: noeviction
