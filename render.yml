@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: oficina-backend
+    env: docker
+    plan: free
+    region: ohio
+    dockerfilePath: ./Dockerfile
+
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: WAHA_API_KEY
+        sync: false
+      - key: WAHA_API_BASE
+        sync: false
+      - key: REDIS_URL
+        fromService:
+          name: oficina-redis
+          type: redis
+          property: connectionString
+      - key: JWT_SECRET
+        sync: false
+      - key: PORT
+        value: 8000
+
+  # Redis gerenciado pelo Render
+  - type: redis
+    name: oficina-redis
+    plan: free
+    region: ohio
+    maxmemoryPolicy: noeviction
